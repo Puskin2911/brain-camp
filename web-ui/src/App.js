@@ -1,6 +1,6 @@
 import {Route, Switch} from "react-router";
 import Home from "./component/Home";
-import {BrowserRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import NotFound from "./component/error/NotFound";
 import KnightTour from "./games/KnightTour/KnightTour";
 import React from "react";
@@ -13,7 +13,7 @@ import NPuzzle from "./games/NPuzzle/NPuzzle";
 function App() {
     return (
         <Provider store={store}>
-            <BrowserRouter>
+            <HashRouter>
                 <Switch>
                     <Route exact path={"/"} component={Home}/>
                     <Route exact path={"/sudoku"} component={Sudoku}/>
@@ -24,7 +24,7 @@ function App() {
                     </Route>
                     <Route path="/" component={NotFound}/>
                 </Switch>
-            </BrowserRouter>
+            </HashRouter>
         </Provider>
     )
 }
