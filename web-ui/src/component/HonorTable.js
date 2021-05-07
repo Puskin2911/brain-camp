@@ -1,5 +1,5 @@
 import {Table} from "react-bootstrap";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {mockTrainers} from "../mockData";
 
 export default function HonorTable() {
