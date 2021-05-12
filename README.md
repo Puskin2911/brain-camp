@@ -1,20 +1,21 @@
-# Train Your Brain
-### What is *Train Your Brain* ?
+# BrainCamp
+### What is *BrainCamp* ?
 - Now days, a lot of people wasted your time for the internet. 
 They use their phone to watching movies,tiktok videos, playing bland games, ... for relaxing.
 - I establish this website to help every one can either playing game or train their brain for
 better and better.
 - Here, you have multiple choices for games. You can play any game as you like and almost free.
-### How *Train your brain* train your brain ?
+### How *BrainCamp* train your brain ?
 - TODO
-### How many game *Train your brain* bring to you ?
+### How many game *BrainCamp* bring to you ?
 - This website is in the establishment period. At now, We don't have a lot of games.
 I will try to develop new game in the future.
 - At now, you can try:
   - Sudoku challenge
-  - Horse Checking challenge
+  - Knight Tour challenge
   - Maze Escape challenge
-### How *Train your brain*'s game developed ?
+  - N Puzzle challenge
+### How *BrainCamp*'s game developed ?
 - Technologies:
   - Back-end: Spring Framework (Spring Boot, Spring Data, Spring Security)
   - Front-end: ReactJs library, React-Bootstrap, React-Router
