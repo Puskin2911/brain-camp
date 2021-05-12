@@ -22,17 +22,22 @@ const fillCell = (ctx, position, cellSize, color = 'red') => {
     }
 }
 
+// TODO: Improve offSet calculate method
 const drawCellValue = (ctx, position, cellSize, value, color = 'red',) => {
     if (position !== undefined && position !== null) {
         const fontSize = cellSize / 2;
+        const fontWidth = fontSize * 0.55;
+        const fontHeight = fontSize * 0.8;
+        const length = (value + '').length
+        const horizontalOffSet = (cellSize - fontWidth * length) / 2;
+        const verticalOffset = (cellSize - fontHeight) / 2;
+
         ctx.font = fontSize + 'px Comic Sans MS';
         ctx.fillStyle = color;
 
-        // TODO: Improve offSet calculate method
-        let offset = fontSize / 2
         ctx.fillText(value,
-            (cellSize + LINE_WIDTH) * position.col + LINE_WIDTH + offset,
-            (cellSize + LINE_WIDTH) * (position.row + 1) + LINE_WIDTH - offset)
+            (cellSize + LINE_WIDTH) * position.col + LINE_WIDTH + horizontalOffSet,
+            (cellSize + LINE_WIDTH) * (position.row + 1) + LINE_WIDTH - verticalOffset)
     }
 }
 
