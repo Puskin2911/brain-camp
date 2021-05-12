@@ -5,6 +5,7 @@ import GameLevel from "../../constants/GameLevel";
 import {useDispatch, useSelector} from "react-redux";
 import NPuzzleAction from "../../store/action/NPuzzleAction";
 import nPuzzleService from "../../service/NPuzzleService";
+import NPuzzleGoal from "./NPuzzleGoal";
 
 export default function NPuzzleBox() {
     const level = useSelector(state => {
@@ -85,14 +86,13 @@ export default function NPuzzleBox() {
                     </DropdownButton>
                 </Col>
             </Row>
-            <Row className="mt-3">
-                <Col className="border text-center">
-                    <div>Target image here</div>
-                    <br/><br/><br/><br/><br/><br/>
+            <Row className="mt-4">
+                <Col className="text-center">
+                    <NPuzzleGoal/>
                 </Col>
             </Row>
             {moveLeft !== 0 ?
-                <Row className="justify-content-center">
+                <Row className="justify-content-center mt-4">
                     <Col className="text-center border">
                         <h3><code>move allowed</code></h3>
                         <h3><code>{moveAllowed}</code></h3>
@@ -102,7 +102,7 @@ export default function NPuzzleBox() {
                         <h3><code>{moveLeft}</code></h3>
                     </Col>
                 </Row>
-                : <Row className={"justify-content-center mt-5"}>
+                : <Row className={"justify-content-center mt-4"}>
                     <Col>
                         <h3 className={"entry-title text-center"}>{getGameResult()}</h3>
                     </Col>

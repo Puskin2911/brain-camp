@@ -106,7 +106,6 @@ export default function NPuzzlePG() {
             <Row>
                 <Col>
                     <canvas ref={canvasRef}
-                            className="border border-danger"
                             tabIndex="1"
                             width={boardSize}
                             height={boardSize}
