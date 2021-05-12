@@ -34,7 +34,7 @@ export default function LevelBox() {
                         </InputGroup.Prepend>
                         <Form.Control as="select" value={localLevel} onChange={handleLevelChange}>
                             <option value={GameLevel.EASY}>{GameLevel.EASY}</option>
-                            <option value={GameLevel.MEDIUM}>{GameLevel.MEDIUM}</option>
+                            <option value={GameLevel.NORMAL}>{GameLevel.NORMAL}</option>
                             <option value={GameLevel.HARD}>{GameLevel.HARD}</option>
                             <option value={GameLevel.EXPERT}>{GameLevel.EXPERT}</option>
                         </Form.Control>

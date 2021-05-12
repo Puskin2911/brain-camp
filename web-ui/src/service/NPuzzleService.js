@@ -34,36 +34,33 @@ const getBoardGoal = (size) => {
     return arr
 }
 
-// TODO: Update algorithm to shuffle board
+/**
+ * Shuffle board x times while x = 2 * number of cell on board
+ * @param boardStatus
+ */
 const shuffleBoard = (boardStatus) => {
-    const startPosition = NPuzzleGame.getEmptyPosition(boardStatus)
     let emptyPosition = NPuzzleGame.getEmptyPosition(boardStatus)
 
-    const cellNumber = boardStatus.length
+    const boardLength = boardStatus.length
 
-    let shuffled = false;
-    while (!emptyPosition.compareTo(startPosition) || !shuffled) {
+    for (let i = 0; i < boardLength * boardLength * 2; i++) {
         const random = Math.floor(Math.random() * 4)
         if (random === 0 && emptyPosition.row > 0) {
             const toPosition = emptyPosition.getUp()
             swapPosition(boardStatus, emptyPosition, toPosition)
-            emptyPosition = toPosition;
-            shuffled = true;
-        } else if (random === 1 && emptyPosition.row < cellNumber - 1) {
+            emptyPosition = toPosition
+        } else if (random === 1 && emptyPosition.row < boardLength - 1) {
             const toPosition = emptyPosition.getDown()
             swapPosition(boardStatus, emptyPosition, toPosition)
-            emptyPosition = toPosition;
-            shuffled = true;
+            emptyPosition = toPosition
         } else if (random === 2 && emptyPosition.col > 0) {
             const toPosition = emptyPosition.getLeft()
             swapPosition(boardStatus, emptyPosition, toPosition)
-            emptyPosition = toPosition;
-            shuffled = true;
-        } else if (random === 3 && emptyPosition.col < cellNumber - 1) {
+            emptyPosition = toPosition
+        } else if (random === 3 && emptyPosition.col < boardLength - 1) {
             const toPosition = emptyPosition.getRight()
             swapPosition(boardStatus, emptyPosition, toPosition)
-            emptyPosition = toPosition;
-            shuffled = true;
+            emptyPosition = toPosition
         }
     }
 }
@@ -74,7 +71,8 @@ const getGame = (level) => {
     const boardInit = cloneArray(boardGoal)
     shuffleBoard(boardInit)
 
-    // TODO: Update moveAllowed
+    // TODO: Solve and update move and how to solve
+
     return new NPuzzleGame(level, boardInit, boardGoal, 20)
 }
 

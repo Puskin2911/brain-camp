@@ -3,7 +3,7 @@ import NPuzzleAction from "../action/NPuzzleAction";
 import {cloneArray} from "../../utils/ArrayUtils";
 import nPuzzleService from "../../service/NPuzzleService";
 
-const initState = nPuzzleService.getGame(GameLevel.EASY)
+const initState = nPuzzleService.getGame(GameLevel.NEWBIE)
 
 export default function nPuzzleReducer(state = initState, action) {
     switch (action.type) {

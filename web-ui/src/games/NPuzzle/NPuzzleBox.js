@@ -79,10 +79,12 @@ export default function NPuzzleBox() {
                 </Col>
                 <Col sm={4} className="text-right">
                     <DropdownButton id="level-dropdown" variant="light" title={level} className="m-2">
+                        <Dropdown.Item onClick={handleLevelChange}>{GameLevel.NEWBIE}</Dropdown.Item>
                         <Dropdown.Item onClick={handleLevelChange}>{GameLevel.EASY}</Dropdown.Item>
-                        <Dropdown.Item onClick={handleLevelChange}>{GameLevel.MEDIUM}</Dropdown.Item>
+                        <Dropdown.Item onClick={handleLevelChange}>{GameLevel.NORMAL}</Dropdown.Item>
                         <Dropdown.Item onClick={handleLevelChange}>{GameLevel.HARD}</Dropdown.Item>
                         <Dropdown.Item onClick={handleLevelChange}>{GameLevel.EXPERT}</Dropdown.Item>
+                        <Dropdown.Item onClick={handleLevelChange}>{GameLevel.GOD}</Dropdown.Item>
                     </DropdownButton>
                 </Col>
             </Row>

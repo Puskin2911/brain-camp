@@ -1,13 +1,17 @@
+const NEWBIE = "Newbie";
 const EASY = "Easy";
-const MEDIUM = "Medium";
+const NORMAL = "Normal";
 const HARD = "Hard";
 const EXPERT = "Expert";
+const GOD = "God";
 
 const GameLevel = {
+    NEWBIE,
     EASY,
-    MEDIUM,
+    NORMAL,
     HARD,
-    EXPERT
+    EXPERT,
+    GOD
 
 }
 

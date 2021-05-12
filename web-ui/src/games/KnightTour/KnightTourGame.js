@@ -18,7 +18,7 @@ export default class KnightTourGame {
         switch (level) {
             case GameLevel.EASY:
                 return 4
-            case GameLevel.MEDIUM:
+            case GameLevel.NORMAL:
                 return 6
             case GameLevel.HARD:
                 return 8

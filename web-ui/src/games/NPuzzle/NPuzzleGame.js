@@ -15,13 +15,17 @@ export default class NPuzzleGame {
 
     static resolveCellNumber(level) {
         switch (level) {
+            case GameLevel.NEWBIE:
+                return 2;
             case GameLevel.EASY:
                 return 3
-            case GameLevel.MEDIUM:
+            case GameLevel.NORMAL:
                 return 4
             case GameLevel.HARD:
-                return 6
+                return 5
             case GameLevel.EXPERT:
+                return 6
+            case GameLevel.GOD:
                 return 8
             default:
                 return 10
