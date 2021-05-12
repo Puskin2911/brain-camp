@@ -7,6 +7,7 @@ import KnightTourAction from "../../store/action/KnightTourAction";
 import knightTourService from "../../service/KnightTourService";
 import Position from "../../utils/Position";
 import {cloneArray} from "../../utils/ArrayUtils";
+import Header from "../../component/Header";
 
 export default function KnightTour() {
     // Stored state
@@ -66,20 +67,18 @@ export default function KnightTour() {
 
     return (
         <Container fluid>
-            <Row className="justify-content-around border-bottom border-top p-2">
-                <a className={"text-normal"} href={"/"}><h3 className="entry-title">BrainCamp</h3></a>
-            </Row>
+            <Header/>
             <Row className={"justify-content-center mt-4"}>
-                <Col sm={5} className={"border"}>
+                <Col sm={5}>
                     <KnightTourPG/>
                 </Col>
-                <Col sm={1} className={"text-center border"}>
+                <Col sm={1} className={"text-center"}>
                     <Button onClick={handleCommit} disabled={typingValue === null || typingValue === ''}>Commit</Button>
                     <br/><br/><br/><br/><br/>
                     <Button variant={"info"}
                             onClick={handleShowBoard}>{boardVisible ? 'Close Board' : 'Open Board'}</Button>
                 </Col>
-                <Col sm={5} className={"border"}>
+                <Col sm={5}>
                     <KnightTourBox visible={boardVisible} boardStatus={boardStatus}/>
                 </Col>
             </Row>
