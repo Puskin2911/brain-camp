@@ -1,17 +1,19 @@
 import Item from "./utils/Item";
 import GameLevel from "./constants/GameLevel";
+import {loadSudoku} from "./service/ImageLoader";
 
 export function mockGameInfo(textId) {
     return {
         textId: textId.toLowerCase(),
         name: textId,
-        skill: "Brain, Eyes",
-        avatar: "image"
+        skills: "Brain, Eyes",
+        avatar: loadSudoku()
     }
 }
 
 export function mockGames() {
-    return [mockGameInfo("Sudoku"), mockGameInfo("Knight-tour"), mockGameInfo("Ton"), mockGameInfo("N-puzzle"), mockGameInfo("test-game")]
+    return [mockGameInfo("Sudoku"), mockGameInfo("Knight-tour"), mockGameInfo("N-puzzle"),
+        mockGameInfo("Ton"), mockGameInfo("secret-game")]
 }
 
 export function mockTrainers() {

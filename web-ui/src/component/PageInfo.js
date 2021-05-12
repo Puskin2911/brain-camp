@@ -5,10 +5,12 @@ import React from "react";
 export default function PageInfo() {
     return (
         <Container fluid className={"border border-danger"}>
-            <Row className={"vh-20 my-5 border border-primary"}>
-
+            <Row className={"border border-primary"}>
+                <Col className="text-center">
+                    <div>User info</div>
+                </Col>
             </Row>
-            <Row>
+            <Row className={"mt-4"}>
                 <Col>
                     <HonorTable/>
                 </Col>
