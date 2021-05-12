@@ -3,8 +3,9 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import GameLevel from "../../constants/GameLevel";
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import NPuzzleAction from "../../store/action/NPuzzleAction";
-import nPuzzleService from "../../service/NPuzzleService";
+import SudokuKeyBoard from "./SudokuKeyBoard";
+import SudokuAction from "../../store/action/SudokuAction";
+import sudokuService from "../../service/SudokuService";
 
 export default function SudokuBox() {
 
@@ -18,8 +19,8 @@ export default function SudokuBox() {
         const newLevel = event.target.innerText
         if (newLevel !== level) {
             const action = {
-                type: NPuzzleAction.changeLevel,
-                payload: nPuzzleService.getGame(newLevel)
+                type: SudokuAction.changeLevel,
+                payload: sudokuService.getGame(newLevel)
             }
             dispatch(action)
         }
@@ -27,15 +28,15 @@ export default function SudokuBox() {
 
     const handleNewGame = () => {
         const action = {
-            type: NPuzzleAction.newGame,
-            payload: nPuzzleService.getGame(level)
+            type: SudokuAction.newGame,
+            payload: sudokuService.getGame(level)
         }
         dispatch(action)
     }
 
     const handleResetGame = () => {
         const action = {
-            type: NPuzzleAction.resetGame
+            type: SudokuAction.resetGame
         }
         dispatch(action)
     }
@@ -78,42 +79,10 @@ export default function SudokuBox() {
                     </Button>
                 </Col>
             </Row>
-            <Row className="mt-3">
-                <Container>
-                    <Row className={"justify-content-center"}>
-                        <Col sm={2} className={"text-center border m-2"}>
-                            <code>1</code>
-                        </Col>
-                        <Col sm={2} className={"text-center border m-2"}>
-                            <code>1</code>
-                        </Col>
-                        <Col sm={2} className={"text-center border m-2"}>
-                            <code>1</code>
-                        </Col>
-                    </Row>
-                    <Row className={"justify-content-center"}>
-                        <Col sm={2} className={"text-center border m-2"}>
-                            <code>1</code>
-                        </Col>
-                        <Col sm={2} className={"text-center border m-2"}>
-                            <code>1</code>
-                        </Col>
-                        <Col sm={2} className={"text-center border m-2"}>
-                            <code>1</code>
-                        </Col>
-                    </Row>
-                    <Row className={"justify-content-center"}>
-                        <Col sm={2} className={"text-center border m-2"}>
-                            <code>1</code>
-                        </Col>
-                        <Col sm={2} className={"text-center border m-2"}>
-                            <code>1</code>
-                        </Col>
-                        <Col sm={2} className={"text-center border m-2"}>
-                            <code>1</code>
-                        </Col>
-                    </Row>
-                </Container>
+            <Row className="mt-4 justify-content-center">
+                <Col className="text-center">
+                    <SudokuKeyBoard/>
+                </Col>
             </Row>
         </Container>
     )

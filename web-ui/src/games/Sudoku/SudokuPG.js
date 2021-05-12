@@ -15,8 +15,8 @@ export default function SudokuPG() {
 
     const dispatch = useDispatch()
 
-    const cellNumber = useSelector(state => {
-        return state.games.Sudoku.cellNumber
+    const rowNumber = useSelector(state => {
+        return state.games.Sudoku.rowNumber
     })
 
     const boardStatus = useSelector(state => {
@@ -52,14 +52,14 @@ export default function SudokuPG() {
         boardFactory.clearBoard(canvas);
         boardFactory.getSudokuBoard(ctx, DEFAULT_SUDOKU_BOARD_CELL);
 
-        const cellSize = resolveCellSize(boardSize, cellNumber)
+        const cellSize = resolveCellSize(boardSize, rowNumber)
         canvasService.fillCell(ctx, pickingPosition, cellSize, 'lightGrey');
 
         if (boardStatus != null) {
-            sudokuService.displayBoard(ctx, boardStatus, boardSize, cellNumber);
+            sudokuService.displayBoard(ctx, boardStatus, boardSize, rowNumber);
         }
         sudokuService.drawConflict(ctx, conflictPositions);
-    }, [boardSize, boardStatus, cellNumber, conflictPositions, pickingPosition])
+    }, [boardSize, boardStatus, rowNumber, conflictPositions, pickingPosition])
 
     const handleMouseOver = () => {
         canvasRef.current.style.cursor = "pointer";
@@ -113,7 +113,7 @@ export default function SudokuPG() {
 
     const handleMove = (event) => {
         const canvas = canvasRef.current;
-        const xy = canvasService.getPosition(canvas, event, boardSize, cellNumber);
+        const xy = canvasService.getPosition(canvas, event, boardSize, rowNumber);
         if (xy == null) return;
 
         if (pickingPosition != null) {

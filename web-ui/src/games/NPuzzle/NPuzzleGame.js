@@ -5,7 +5,7 @@ import Position from "../../utils/Position";
 export default class NPuzzleGame {
     constructor(level, boardInit, boardGoal, moveAllowed) {
         this.level = level
-        this.cellNumber = NPuzzleGame.resolveCellNumber(level)
+        this.rowNumber = NPuzzleGame.resolveRowNumber(level)
         this.boardStatusInit = cloneArray(boardInit)
         this.boardStatus = cloneArray(boardInit)
         this.boardGoal = cloneArray(boardGoal)
@@ -13,7 +13,7 @@ export default class NPuzzleGame {
         this.moveLeft = moveAllowed
     }
 
-    static resolveCellNumber(level) {
+    static resolveRowNumber(level) {
         switch (level) {
             case GameLevel.NEWBIE:
                 return 2;

@@ -5,16 +5,16 @@ import GameLevel from "../../constants/GameLevel";
 export default class KnightTourGame {
     constructor(level, knightPosition, knightValue) {
         this.level = level
-        this.cellNumber = KnightTourGame.resolveCellNumber(level)
+        this.rowNumber = KnightTourGame.resolveRowNumber(level)
         this.knightPosition = knightPosition
         this.pickingPosition = null
         this.knightValue = knightValue
         this.typingValue = null
         this.boardStatus = mockKnightBoardStatus()
-        this.movablePositions = knightTourService.findMovablePositions(knightPosition, this.cellNumber)
+        this.movablePositions = knightTourService.findMovablePositions(knightPosition, this.rowNumber)
     }
 
-    static resolveCellNumber(level) {
+    static resolveRowNumber(level) {
         switch (level) {
             case GameLevel.EASY:
                 return 4

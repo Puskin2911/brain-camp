@@ -12,8 +12,8 @@ export default function NPuzzlePG() {
     const canvasRef = useRef();
     const boardSize = DEFAULT_BOARD_SIZE;
 
-    const cellNumber = useSelector(state => {
-        return state.games.NPuzzle.cellNumber
+    const rowNumber = useSelector(state => {
+        return state.games.NPuzzle.rowNumber
     })
     const boardStatus = useSelector(state => {
         return state.games.NPuzzle.boardStatus
@@ -37,11 +37,11 @@ export default function NPuzzlePG() {
         const ctx = canvas.getContext('2d');
 
         boardFactory.clearBoard(canvas);
-        boardFactory.getChessBoard(ctx, cellNumber, boardSize);
+        boardFactory.getChessBoard(ctx, rowNumber, boardSize);
         if (boardStatus != null) {
-            nPuzzleService.drawBoardStatus(ctx, boardStatus, boardSize, cellNumber)
+            nPuzzleService.drawBoardStatus(ctx, boardStatus, boardSize, rowNumber)
         }
-    }, [boardSize, boardStatus, cellNumber])
+    }, [boardSize, boardStatus, rowNumber])
 
     const handleMouseOver = () => {
         canvasRef.current.style.cursor = "pointer";
@@ -74,7 +74,7 @@ export default function NPuzzlePG() {
         if (key === 'd') {
             const currentRow = currentHole.row
             const currentCol = currentHole.col
-            if (currentCol < cellNumber - 1) {
+            if (currentCol < rowNumber - 1) {
                 updateState(currentRow, currentCol, currentRow, currentCol + 1)
             }
         }
@@ -90,7 +90,7 @@ export default function NPuzzlePG() {
         if (key === 's') {
             const currentRow = currentHole.row
             const currentCol = currentHole.col
-            if (currentRow < cellNumber - 1) {
+            if (currentRow < rowNumber - 1) {
                 updateState(currentRow, currentCol, currentRow + 1, currentCol)
             }
         }

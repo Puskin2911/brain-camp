@@ -12,8 +12,8 @@ export default function KnightTourPG() {
     const boardSize = DEFAULT_BOARD_SIZE;
 
     // Stored state
-    const cellNumber = useSelector(state => {
-        return state.games.KnightTour.cellNumber
+    const rowNumber = useSelector(state => {
+        return state.games.KnightTour.rowNumber
     })
 
     const knightPosition = useSelector(state => {
@@ -39,9 +39,9 @@ export default function KnightTourPG() {
         const ctx = canvas.getContext('2d');
 
         boardFactory.clearBoard(canvas);
-        boardFactory.getChessBoard(ctx, cellNumber, boardSize);
+        boardFactory.getChessBoard(ctx, rowNumber, boardSize);
 
-        const cellSize = resolveCellSize(boardSize, cellNumber)
+        const cellSize = resolveCellSize(boardSize, rowNumber)
         canvasService.fillCell(ctx, knightPosition, cellSize, 'Aqua');
         canvasService.fillCell(ctx, pickingPosition, cellSize, 'Aquamarine');
         canvasService.drawCellValue(ctx, knightPosition, cellSize, knightValue);
@@ -49,8 +49,8 @@ export default function KnightTourPG() {
         if (typingValue != null) {
             canvasService.drawCellValue(ctx, pickingPosition, cellSize, typingValue);
         }
-        knightTourService.drawMovablePositions(ctx, boardSize, cellNumber, movablePositions);
-    }, [boardSize, cellNumber, knightPosition, knightValue, movablePositions, pickingPosition, typingValue])
+        knightTourService.drawMovablePositions(ctx, boardSize, rowNumber, movablePositions);
+    }, [boardSize, rowNumber, knightPosition, knightValue, movablePositions, pickingPosition, typingValue])
 
     const handleMouseOver = () => {
         canvasRef.current.style.cursor = "pointer";
@@ -58,14 +58,14 @@ export default function KnightTourPG() {
 
     const handleMouseClick = (event) => {
         const canvas = canvasRef.current;
-        const xy = canvasService.getPosition(canvas, event, boardSize, cellNumber)
+        const xy = canvasService.getPosition(canvas, event, boardSize, rowNumber)
         if (xy == null) return;
 
         movablePositions.forEach(position => {
             if (xy.compareTo(position)) {
                 dispatch({
                     type: KnightTourAction.updateMovablePositions,
-                    payload: knightTourService.findMovablePositions(knightPosition, cellNumber, [xy])
+                    payload: knightTourService.findMovablePositions(knightPosition, rowNumber, [xy])
                 })
                 dispatch({
                     type: KnightTourAction.updatePickingPosition,

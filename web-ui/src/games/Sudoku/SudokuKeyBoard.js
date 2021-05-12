@@ -1,20 +1,16 @@
-import {Col, Container, Row} from "react-bootstrap";
 import React, {useEffect, useRef} from "react";
 import {DEFAULT_BOARD_SIZE} from "../../constants/BoardConstants";
 import {useSelector} from "react-redux";
 import boardFactory from "../../service/BoardFactory";
-import nPuzzleService from "../../service/NPuzzleService";
+import {Col, Container, Row} from "react-bootstrap";
+import sudokuService from "../../service/SudokuService";
 
-export default function NPuzzleGoal() {
+export default function SudokuKeyBoard() {
     const canvasRef = useRef();
     const boardSize = DEFAULT_BOARD_SIZE * 0.5;
 
-    const boardGoal = useSelector(state => {
-        return state.games.NPuzzle.boardGoal
-    })
-
-    const rowNumber = useSelector(state => {
-        return state.games.NPuzzle.rowNumber
+    const keyBoard = useSelector(state => {
+        return state.games.Sudoku.keyBoard
     })
 
     const drawBoard = () => {
@@ -22,10 +18,10 @@ export default function NPuzzleGoal() {
         const ctx = canvas.getContext('2d');
 
         boardFactory.clearBoard(canvas);
-        boardFactory.getChessBoard(ctx, rowNumber, boardSize);
+        boardFactory.getChessBoard(ctx, 3, boardSize);
 
-        if (boardGoal != null) {
-            nPuzzleService.drawBoardStatus(ctx, boardGoal, boardSize, rowNumber)
+        if (keyBoard != null) {
+            sudokuService.displayKeyBoard(ctx, keyBoard, boardSize, 3)
         }
     }
 

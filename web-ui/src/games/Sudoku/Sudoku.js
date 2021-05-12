@@ -7,7 +7,7 @@ import SudokuBox from "./SudokuBox";
 
 export default function Sudoku() {
     return (
-        <Container>
+        <Container fluid>
             <Header/>
             <Row className="mt-4">
                 <Container>

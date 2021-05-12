@@ -66,8 +66,8 @@ const shuffleBoard = (boardStatus) => {
 }
 
 const getGame = (level) => {
-    const cellNumber = NPuzzleGame.resolveCellNumber(level)
-    const boardGoal = getBoardGoal(cellNumber)
+    const rowNumber = NPuzzleGame.resolveRowNumber(level)
+    const boardGoal = getBoardGoal(rowNumber)
     const boardInit = cloneArray(boardGoal)
     shuffleBoard(boardInit)
 

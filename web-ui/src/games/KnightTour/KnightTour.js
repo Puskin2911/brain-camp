@@ -21,8 +21,8 @@ export default function KnightTour() {
         return state.games.KnightTour.typingValue;
     })
 
-    const cellNumber = useSelector(state => {
-        return state.games.KnightTour.cellNumber
+    const rowNumber = useSelector(state => {
+        return state.games.KnightTour.rowNumber
     })
 
     // Local state
@@ -37,7 +37,7 @@ export default function KnightTour() {
         })
         dispatch({
             type: KnightTourAction.updateMovablePositions,
-            payload: knightTourService.findMovablePositions(pickingPosition, cellNumber)
+            payload: knightTourService.findMovablePositions(pickingPosition, rowNumber)
         })
         dispatch({
             type: KnightTourAction.updateKnightValue,

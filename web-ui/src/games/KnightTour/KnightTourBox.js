@@ -15,8 +15,8 @@ export default function KnightTourBox(props) {
         return state.games.KnightTour.knightPosition;
     })
 
-    const cellNumber = useSelector(state => {
-        return state.games.KnightTour.cellNumber;
+    const rowNumber = useSelector(state => {
+        return state.games.KnightTour.rowNumber;
     })
 
     const boardStatus = props.boardStatus;
@@ -26,12 +26,12 @@ export default function KnightTourBox(props) {
         const ctx = canvas.getContext('2d');
 
         boardFactory.clearBoard(canvas);
-        boardFactory.getChessBoard(ctx, cellNumber);
+        boardFactory.getChessBoard(ctx, rowNumber);
 
-        const cellSize = resolveCellSize(boardSize, cellNumber)
+        const cellSize = resolveCellSize(boardSize, rowNumber)
         canvasService.fillCell(ctx, knightPosition, cellSize, 'Aqua');
-        knightTourService.drawBoardStatus(ctx, boardStatus, boardSize, cellNumber);
-    }, [boardSize, boardStatus, cellNumber, knightPosition])
+        knightTourService.drawBoardStatus(ctx, boardStatus, boardSize, rowNumber);
+    }, [boardSize, boardStatus, rowNumber, knightPosition])
 
     const clearBoard = () => {
         const canvas = canvasRef.current;

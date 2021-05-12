@@ -4,10 +4,8 @@ import {mockSudokuBoard} from "../mockData";
 import canvasService from "./CanvasService";
 import Position from "../utils/Position";
 
-const displayBoard = (ctx, boardStatus, boardSize, cellNumber) => {
-    ctx.font = '30px Comic Sans MS';
-
-    const cellSize = resolveCellSize(boardSize, cellNumber)
+const displayBoard = (ctx, boardStatus, boardSize, rowNumber) => {
+    const cellSize = resolveCellSize(boardSize, rowNumber)
 
     if (boardStatus !== null && boardStatus !== undefined)
         boardStatus.forEach((row, i) => {
@@ -21,8 +19,21 @@ const displayBoard = (ctx, boardStatus, boardSize, cellNumber) => {
         })
 }
 
-const drawConflict = (ctx, conflictPositions, boardSize, cellNumber, lineWidth = LINE_WIDTH) => {
-    const cellSize = resolveCellSize(boardSize, cellNumber)
+const displayKeyBoard = (ctx, keyBoard, boardSize, rowNumber) => {
+    const cellSize = resolveCellSize(boardSize, rowNumber)
+
+    if (keyBoard !== null && keyBoard !== undefined)
+        keyBoard.forEach((row, i) => {
+            row.forEach((value, j) => {
+                if (!isNaN(value) && value !== null && value > 0) {
+                    canvasService.drawCellValue(ctx, new Position(i, j), cellSize, value, 'gray');
+                }
+            })
+        })
+}
+
+const drawConflict = (ctx, conflictPositions, boardSize, rowNumber, lineWidth = LINE_WIDTH) => {
+    const cellSize = resolveCellSize(boardSize, rowNumber)
 
     conflictPositions.forEach(position => {
         const xFrom = position.col * (cellSize + 1) + lineWidth;
@@ -40,6 +51,7 @@ const getGame = (level) => {
 
 const sudokuService = {
     displayBoard,
+    displayKeyBoard,
     drawConflict,
     getGame
 }
