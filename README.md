@@ -1,4 +1,7 @@
 # BrainCamp
+
+- This app is now available on: https://publish.djurchdqn9zlc.amplifyapp.com/
+
 ### What is *BrainCamp* ?
 - Now days, a lot of people wasted your time for the internet. 
 They use their phone to watching movies,tiktok videos, playing bland games, ... for relaxing.

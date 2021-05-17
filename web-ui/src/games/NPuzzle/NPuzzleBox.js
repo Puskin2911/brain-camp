@@ -28,6 +28,10 @@ export default function NPuzzleBox() {
         return state.games.NPuzzle.boardGoal
     })
 
+    const moveSolutions = useSelector(state => {
+        return state.games.NPuzzle.moveSolutions
+    })
+
     const dispatch = useDispatch();
 
     const handleLevelChange = (event) => {
@@ -70,6 +74,10 @@ export default function NPuzzleBox() {
         } else return "You Lose"
     }
 
+    const getSolutions = () => {
+        return moveSolutions.map(direction => direction + " ");
+    }
+
     return (
         <Container fluid>
             <Row className="justify-content-between">
@@ -94,19 +102,21 @@ export default function NPuzzleBox() {
                 </Col>
             </Row>
             {moveLeft !== 0 ?
-                <Row className="justify-content-center mt-4">
-                    <Col className="text-center border">
-                        <h3><code>move allowed</code></h3>
-                        <h3><code>{moveAllowed}</code></h3>
+                <Row className="justify-content-around mt-4">
+                    <Col sm="5" className="text-center border rounded pt-2">
+                        <h5>MOVE ALLOWED</h5>
+                        <h1 className="p-0 m-0"><code>{moveAllowed}</code></h1>
                     </Col>
-                    <Col className="text-center border">
-                        <h3><code>move left</code></h3>
-                        <h3><code>{moveLeft}</code></h3>
+                    <Col sm="5" className="text-center border rounded pt-2">
+                        <h5>MOVE LEFT</h5>
+                        <h1><code>{moveLeft}</code></h1>
                     </Col>
                 </Row>
                 : <Row className={"justify-content-center mt-4"}>
                     <Col>
                         <h3 className={"entry-title text-center"}>{getGameResult()}</h3>
+                        <h5 className="entry-title text-center">Result</h5>
+                        <h1 className="text-center"><code className="text-center">{getSolutions()}</code></h1>
                     </Col>
                 </Row>
             }

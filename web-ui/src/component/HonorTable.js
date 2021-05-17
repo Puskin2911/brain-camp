@@ -24,7 +24,7 @@ export default function HonorTable() {
                 {
                     trainers.map((trainer, index) => {
                         return (
-                            <tr>
+                            <tr key={trainer.id}>
                                 <td>{index + 1}</td>
                                 <td>{trainer.username}</td>
                                 <td>{trainer.elo}</td>

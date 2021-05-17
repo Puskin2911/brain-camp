@@ -3,14 +3,15 @@ import {cloneArray} from "../../utils/ArrayUtils";
 import Position from "../../utils/Position";
 
 export default class NPuzzleGame {
-    constructor(level, boardInit, boardGoal, moveAllowed) {
+    constructor(level, boardInit, boardGoal, moveSolutions) {
         this.level = level
         this.rowNumber = NPuzzleGame.resolveRowNumber(level)
         this.boardStatusInit = cloneArray(boardInit)
         this.boardStatus = cloneArray(boardInit)
         this.boardGoal = cloneArray(boardGoal)
-        this.moveAllowed = moveAllowed
-        this.moveLeft = moveAllowed
+        this.moveSolutions = moveSolutions
+        this.moveAllowed = moveSolutions.length
+        this.moveLeft = moveSolutions.length
     }
 
     static resolveRowNumber(level) {

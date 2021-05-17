@@ -3,6 +3,7 @@ import canvasService from "./CanvasService";
 import {resolveCellSize} from "../constants/BoardConstants";
 import NPuzzleGame from "../games/NPuzzle/NPuzzleGame";
 import {cloneArray, swapPosition} from "../utils/ArrayUtils";
+import NPuzzleSolver from "../games/NPuzzle/NPuzzleSolver";
 
 const drawBoardStatus = (ctx, boardStatus, boardSize, cellNumber) => {
     const cellSize = resolveCellSize(boardSize, cellNumber)
@@ -43,7 +44,7 @@ const shuffleBoard = (boardStatus) => {
 
     const boardLength = boardStatus.length
 
-    for (let i = 0; i < boardLength * boardLength * 2; i++) {
+    for (let i = 0; i < boardLength * boardLength * 3; i++) {
         const random = Math.floor(Math.random() * 4)
         if (random === 0 && emptyPosition.row > 0) {
             const toPosition = emptyPosition.getUp()
@@ -68,12 +69,21 @@ const shuffleBoard = (boardStatus) => {
 const getGame = (level) => {
     const rowNumber = NPuzzleGame.resolveRowNumber(level)
     const boardGoal = getBoardGoal(rowNumber)
-    const boardInit = cloneArray(boardGoal)
+    let boardInit = cloneArray(boardGoal)
+
     shuffleBoard(boardInit)
 
-    // TODO: Solve and update move and how to solve
+    let nPuzzleSolver = new NPuzzleSolver(boardInit, boardGoal)
+    let solution = nPuzzleSolver.solve()
 
-    return new NPuzzleGame(level, boardInit, boardGoal, 20)
+    while (solution == null || solution.directions.length === 0) {
+        boardInit = cloneArray(boardGoal)
+        shuffleBoard(boardInit)
+        nPuzzleSolver = new NPuzzleSolver(boardInit, boardGoal)
+        solution = nPuzzleSolver.solve()
+    }
+
+    return new NPuzzleGame(level, boardInit, boardGoal, solution.directions)
 }
 
 const nPuzzleService = {

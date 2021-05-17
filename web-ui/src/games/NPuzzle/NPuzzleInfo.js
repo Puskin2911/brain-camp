@@ -10,7 +10,7 @@ export default function NPuzzleInfo() {
                     <p>The goal of N-Puzzle is move the pieces in the box to reach the target box</p>
                     <ul>
                         <li>Use <code>A</code>, <code>S</code>, <code>D</code>, <code>W</code> to move</li>
-                        <li><b>Note</b>: Turn off unikey or vietKey to avoid unexpected error</li>
+                        <li><b>Note</b>: Turn off Unikey or VietKey to avoid unexpected error</li>
                     </ul>
                 </Col>
             </Row>

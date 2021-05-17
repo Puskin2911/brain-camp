@@ -1,3 +1,5 @@
+import Position from "./Position";
+
 export function cloneArray(array) {
     const newArray = [];
 
@@ -13,4 +15,33 @@ export function swapPosition(array, first, second) {
     const temp = array[firstRow][firstCol]
     array[firstRow][firstCol] = array[secondRow][secondCol]
     array[secondRow][secondCol] = temp;
+}
+
+export function findPosition(array, value) {
+    let position = null;
+    if (array !== null && array !== undefined) {
+        array.forEach((row, i) => {
+            row.forEach((item, j) => {
+                if (item === value) {
+                    position = new Position(i, j)
+                }
+            })
+        })
+    }
+    return position
+}
+
+export function manhattan(first, second) {
+    let sum = 0;
+    first.forEach((row, firstRow) => {
+        row.forEach((value, firstCol) => {
+            if (value !== 0) {
+                const secondPosition = findPosition(second, value)
+                const [secondRow, secondCol] = secondPosition.toRowCol()
+
+                sum += Math.abs(firstRow - secondRow) + Math.abs(firstCol - secondCol)
+            }
+        })
+    })
+    return sum;
 }

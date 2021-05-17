@@ -16,6 +16,16 @@ export function mockGames() {
         mockGameInfo("Ton"), mockGameInfo("secret-game")]
 }
 
+export function mockUserInfo() {
+    return {
+        id: 1000,
+        username: "Hulk",
+        elo: 2000,
+        avatar: loadAvatar("hop-hop"),
+        description: "Just @@"
+    }
+}
+
 export function mockTrainers() {
     return [
         {
