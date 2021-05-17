@@ -12,7 +12,7 @@ export function mockGameInfo(textId) {
 }
 
 export function mockGames() {
-    return [mockGameInfo("Sudoku"), mockGameInfo("Knight-tour"), mockGameInfo("N-puzzle"),
+    return [mockGameInfo("N-puzzle"), mockGameInfo("Knight-tour"), mockGameInfo("Sudoku"),
         mockGameInfo("Ton"), mockGameInfo("secret-game")]
 }
 
