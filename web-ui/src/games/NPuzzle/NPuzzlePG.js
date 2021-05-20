@@ -63,7 +63,7 @@ export default function NPuzzlePG() {
         if (moveLeft === 0) return;
         const key = event.key;
         // Left
-        if (key === 'a') {
+        if (key === 'd') {
             const currentRow = currentHole.row
             const currentCol = currentHole.col
             if (currentCol > 0) {
@@ -71,7 +71,7 @@ export default function NPuzzlePG() {
             }
         }
         // Right
-        if (key === 'd') {
+        if (key === 'a') {
             const currentRow = currentHole.row
             const currentCol = currentHole.col
             if (currentCol < rowNumber - 1) {
@@ -79,7 +79,7 @@ export default function NPuzzlePG() {
             }
         }
         // Up
-        if (key === 'w') {
+        if (key === 's') {
             const currentRow = currentHole.row
             const currentCol = currentHole.col
             if (currentRow > 0) {
@@ -87,7 +87,7 @@ export default function NPuzzlePG() {
             }
         }
         // Down
-        if (key === 's') {
+        if (key === 'w') {
             const currentRow = currentHole.row
             const currentCol = currentHole.col
             if (currentRow < rowNumber - 1) {

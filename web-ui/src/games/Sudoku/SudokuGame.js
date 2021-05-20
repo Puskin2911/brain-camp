@@ -1,8 +1,9 @@
 export default class SudokuGame {
-    constructor(level, boardStatus) {
+    constructor(level, boardStatus, boardGoal) {
         this.level = level
         this.rowNumber = SudokuGame.resolveRowNumber(this.level)
         this.boardStatus = boardStatus
+        this.boardGoal = boardGoal
         this.pickingPosition = null
         this.conflictPositions = []
         this.keyBoard = [

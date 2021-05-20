@@ -58,22 +58,22 @@ export default function SudokuBox() {
                 </Col>
             </Row>
             <Row className={"justify-content-center mt-3"}>
-                <Col sm={3} className={"text-center"}>
+                <Col sm={2} className={"text-center"}>
                     <Button variant={"outline-info"} className={"btn-circle"}>
                         <i className="fas fa-undo fa-2x"/>
                     </Button>
                 </Col>
-                <Col sm={3} className={"text-center"}>
+                <Col sm={2} className={"text-center"}>
                     <Button variant={"outline-info"} className={"btn-circle"}>
                         <i className="fas fa-eraser fa-2x"/>
                     </Button>
                 </Col>
-                <Col sm={3} className={"text-center"}>
+                <Col sm={2} className={"text-center"}>
                     <Button variant={"outline-info"} className={"btn-circle"}>
                         <i className="fas fa-pencil-alt fa-2x"/>
                     </Button>
                 </Col>
-                <Col sm={3} className={"text-center"}>
+                <Col sm={2} className={"text-center"}>
                     <Button variant={"outline-info"} className={"btn-circle"}>
                         <i className="fas fa-lightbulb fa-2x"/>
                     </Button>

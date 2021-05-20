@@ -3,7 +3,6 @@ import {DEFAULT_BOARD_SIZE, DEFAULT_SUDOKU_BOARD_CELL, resolveCellSize} from "..
 import boardFactory from "../../service/BoardFactory";
 import sudokuService from "../../service/SudokuService";
 import Item from "../../utils/Item";
-import Position from "../../utils/Position";
 import canvasService from "../../service/CanvasService";
 import {Col, Container, Row} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
@@ -52,13 +51,12 @@ export default function SudokuPG() {
         boardFactory.clearBoard(canvas);
         boardFactory.getSudokuBoard(ctx, DEFAULT_SUDOKU_BOARD_CELL);
 
+        sudokuService.drawConflict(ctx, conflictPositions, boardSize, rowNumber);
+
         const cellSize = resolveCellSize(boardSize, rowNumber)
         canvasService.fillCell(ctx, pickingPosition, cellSize, 'lightGrey');
 
-        if (boardStatus != null) {
-            sudokuService.displayBoard(ctx, boardStatus, boardSize, rowNumber);
-        }
-        sudokuService.drawConflict(ctx, conflictPositions);
+        sudokuService.displayBoard(ctx, boardStatus, boardSize, rowNumber);
     }, [boardSize, boardStatus, rowNumber, conflictPositions, pickingPosition])
 
     const handleMouseOver = () => {
@@ -66,49 +64,39 @@ export default function SudokuPG() {
     }
 
     const handlePressKey = (event) => {
-        const key = Number(event.key);
-        if (!isNaN(key) && event.key != null && event.key !== ' ') {
-            if (pickingPosition != null) {
+        const key = event.key
+        const keyNumber = Number(key)
+        if (pickingPosition != null) {
+            if (!isNaN(keyNumber) && key != null && key !== ' ') {
                 const [row, col] = [pickingPosition.row, pickingPosition.col];
                 const item = boardStatus[row][col];
                 if (item.editable) {
                     const newBoardStatus = [...boardStatus];
-                    newBoardStatus[row][col] = new Item(key, true);
+                    newBoardStatus[row][col] = new Item(keyNumber, true);
 
                     dispatch({
                         type: SudokuAction.updateBoardStatus,
                         payload: newBoardStatus
                     })
 
-                    processCheck(newBoardStatus, pickingPosition);
+                    setConflictPositions(sudokuService.getConflict(newBoardStatus, pickingPosition))
+                }
+            } else if (key === 'Backspace' || key === 'Delete') {
+                const [row, col] = [pickingPosition.row, pickingPosition.col];
+                const item = boardStatus[row][col];
+                if (item.editable) {
+                    const newBoardStatus = [...boardStatus];
+                    newBoardStatus[row][col] = new Item(0, true);
+
+                    dispatch({
+                        type: SudokuAction.updateBoardStatus,
+                        payload: newBoardStatus
+                    })
+
+                    setConflictPositions(sudokuService.getConflict(newBoardStatus, pickingPosition))
                 }
             }
         }
-    }
-
-    const processCheck = (boardStatus, position) => {
-        const [row, col] = position.toRowCol();
-        const currentItem = boardStatus[row][col];
-        const conflictPositions = [];
-        // Row check
-        boardStatus[row].forEach((item, i) => {
-            if (item.value === currentItem.value && currentItem.value !== 0) {
-                conflictPositions.push(new Position(row, i));
-            }
-        })
-        // Col check
-        for (let i = 0; i < boardStatus.length; i++) {
-            if (boardStatus[i][col].value === currentItem.value && currentItem.value !== 0) {
-                conflictPositions.push(new Position(i, col));
-            }
-        }
-
-        // TODO : Square check
-
-        if (conflictPositions.length === 1) {
-            conflictPositions.splice(0, 1);
-        }
-        setConflictPositions(conflictPositions)
     }
 
     const handleMove = (event) => {
@@ -142,7 +130,7 @@ export default function SudokuPG() {
                             height={boardSize}
                             onClick={handleMove}
                             onMouseOver={handleMouseOver}
-                            onKeyPress={handlePressKey}
+                            onKeyUp={handlePressKey}
                     />
                 </Col>
             </Row>

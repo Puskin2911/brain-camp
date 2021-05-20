@@ -11,13 +11,11 @@ function GameBox(props) {
                     <img src={gameInfo.avatar} alt="avatar" width="100%"/>
                 </div>
                 <div className="flip-card-back">
-                    <ul>
+                    <ul className={"border-bottom"}>
                         <li>Skill: {gameInfo.skills}</li>
                     </ul>
-                    <div className="border-top justify-content-end">
-                        <a href={"/" + gameInfo.textId}>
-                            <small className={"float-right"}>Train now -></small>
-                        </a>
+                    <div className="text-center mt-5">
+                        <h2><a href={"/" + gameInfo.textId}>Train now</a></h2>
                     </div>
                 </div>
             </Card.Body>

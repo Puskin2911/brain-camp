@@ -45,3 +45,15 @@ export function manhattan(first, second) {
     })
     return sum;
 }
+
+export function fill2Dimension(size, value) {
+    const arr = []
+    for (let i = 0; i < size; i++) {
+        const row = []
+        for (let j = 0; j < size; j++) {
+            row.push(value)
+        }
+        arr.push(row)
+    }
+    return arr;
+}
