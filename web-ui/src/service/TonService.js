@@ -33,8 +33,40 @@ const resolveEnemy = (players, me, isAfterGuy) => {
     return resolvedPlayer;
 }
 
+const resolveTeamMate = (players, me) => {
+    let resolvedPlayer = null;
+    players.forEach(player => {
+        if (player.team === me.team && player.username !== me.username) {
+            resolvedPlayer = player
+        }
+    })
+    return resolvedPlayer
+}
+
+const updatePlayerReady = (players, readyMessage) => {
+    const newPlayers = [...players];
+
+    newPlayers.forEach(player => {
+        if (player.username === readyMessage.username) {
+            player.ready = readyMessage.ready
+        }
+    })
+
+    return newPlayers;
+}
+
+const updateMeReady = (me, readyMessage) => {
+    const newMe = {...me}
+    newMe.ready = readyMessage.ready
+
+    return newMe
+}
+
 const tonService = {
-    resolveEnemy
+    resolveEnemy,
+    resolveTeamMate,
+    updatePlayerReady,
+    updateMeReady
 }
 
 export default tonService;

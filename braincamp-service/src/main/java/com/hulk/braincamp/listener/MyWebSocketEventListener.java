@@ -1,5 +1,8 @@
 package com.hulk.braincamp.listener;
 
+import java.security.Principal;
+import java.util.Objects;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
@@ -11,34 +14,40 @@ import org.springframework.web.socket.messaging.SessionSubscribeEvent;
 import org.springframework.web.socket.messaging.SessionUnsubscribeEvent;
 
 @Component
-public class MyWebSocketEventListener {
+public class MyWebSocketEventListener
+{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MyWebSocketEventListener.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MyWebSocketEventListener.class);
 
-    @EventListener
-    public void handleWebSocketConnectListener(SessionConnectedEvent event) {
-        LOGGER.info("Received a new web socket connection from " + event.getSource());
-    }
+  @EventListener
+  public void handleWebSocketConnectListener(SessionConnectedEvent event)
+  {
+    Principal principal = event.getUser();
+    LOGGER.info("Received a new web socket connection from user {}", Objects.requireNonNull(principal).getName());
+  }
 
-    @EventListener
-    public void handleSubscribe(SessionSubscribeEvent event) {
-        StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
+  @EventListener
+  public void handleSubscribe(SessionSubscribeEvent event)
+  {
+    StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
 
-        String destination = headerAccessor.getDestination();
-        String subscriptionId = headerAccessor.getSubscriptionId();
+    String destination = headerAccessor.getDestination();
+    String username = Objects.requireNonNull(event.getUser()).getName();
 
-        LOGGER.info("User {} have just subscribe to {}", subscriptionId, destination);
-    }
+    LOGGER.info("User {} have just subscribe to {}", username, destination);
+  }
 
-    @EventListener
-    public void handleUnSubscribe(SessionUnsubscribeEvent event) {
-    }
+  @EventListener
+  public void handleUnSubscribe(SessionUnsubscribeEvent event)
+  {
+  }
 
-    @EventListener
-    public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
-        StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
+  @EventListener
+  public void handleWebSocketDisconnectListener(SessionDisconnectEvent event)
+  {
+    String username = Objects.requireNonNull(event.getUser()).getName();
 
-        LOGGER.info("User {} had disconnected!", headerAccessor.getSubscriptionId());
-    }
+    LOGGER.info("UserId {} had disconnected!", username);
+  }
 
 }

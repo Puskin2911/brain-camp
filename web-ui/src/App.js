@@ -9,6 +9,8 @@ import {Provider} from "react-redux";
 import store from "./store/store";
 import Ton from "./games/ton/Ton";
 import NPuzzle from "./games/NPuzzle/NPuzzle";
+import Login from "./component/Login";
+import PrivateRoute from "./component/common/PrivateRoute";
 
 function App() {
     return (
@@ -17,9 +19,10 @@ function App() {
                 <Route>
                     <Switch>
                         <Route exact path={"/"} component={Home}/>
+                        <Route exact path={"/login"} component={Login}/>
                         <Route exact path={"/sudoku"} component={Sudoku}/>
                         <Route exact path={"/knight-tour"} component={KnightTour}/>
-                        <Route exact path={"/ton"} component={Ton}/>
+                        <PrivateRoute exact path={"/ton"} component={Ton}/>
                         <Route exact path="/n-puzzle">
                             <NPuzzle gameId="n-puzzle"/>
                         </Route>

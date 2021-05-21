@@ -6,6 +6,9 @@ import Stomp from "stompjs";
 import {useDispatch, useSelector} from "react-redux";
 import TonAction from "./TonAction";
 import TonEnemyTable from "../../games/ton/TonEnemyTable";
+import TonTeamMateTable from "../../games/ton/TonTeamMateTable";
+import TonPG from "../../games/ton/TonPG";
+import tonService from "../../service/TonService";
 
 export default function TonRoom() {
 
@@ -19,6 +22,10 @@ export default function TonRoom() {
         return state.games.Ton.players
     })
 
+    const me = useSelector(state => {
+        return state.games.Ton.me
+    })
+
     useEffect(() => {
         stompClient.connect({}, () => {
             stompClient.subscribe("/room/join", (payload) => {
@@ -27,7 +34,7 @@ export default function TonRoom() {
                 const newPlayers = [...players]
                 newPlayers.push(player)
                 dispatch({
-                    type: TonAction.updatePlayer,
+                    type: TonAction.updatePlayers,
                     payload: newPlayers
                 })
             });
@@ -40,6 +47,20 @@ export default function TonRoom() {
                 console.log("From Room receive signal start game!");
                 const gameStart = JSON.parse(payload.body);
             });
+
+            stompClient.subscribe("/room/ready", payload => {
+                console.log("Receive user update ready state")
+                const readyMessage = JSON.parse(payload.body);
+
+                dispatch({
+                    type: TonAction.updatePlayers,
+                    payload: tonService.updatePlayerReady(players, readyMessage)
+                })
+                dispatch({
+                    type: TonAction.updateMe,
+                    payload: tonService.updateMeReady(me, readyMessage)
+                })
+            })
         })
     }, [])
 
@@ -47,7 +68,7 @@ export default function TonRoom() {
         <Container>
             <Row className={"justify-content-center vh-20"}>
                 <Col sm={4} className={"border"}>
-                    <div>Teammate</div>
+                    <TonTeamMateTable/>
                 </Col>
             </Row>
             <Row className={"justify-content-between vh-40 mt-5"}>
@@ -55,7 +76,7 @@ export default function TonRoom() {
                     <TonEnemyTable isAfterGuy={false}/>
                 </Col>
                 <Col sm={5} className={"border"}>
-                    <div>Playing ground</div>
+                    <TonPG stompClient={stompClient}/>
                 </Col>
                 <Col sm={3} className={"border"}>
                     <TonEnemyTable isAfterGuy={true}/>

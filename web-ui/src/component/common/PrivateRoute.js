@@ -2,6 +2,7 @@ import React from "react";
 import {Redirect, Route} from "react-router-dom";
 import LoadingIndicator from "./LoadingIndicator";
 import authService from "../../service/AuthService";
+import localStorageHelper from "../../utils/localStorageHelper";
 
 const PrivateRoute = ({component: Component, ...rest}) => {
 
@@ -12,11 +13,11 @@ const PrivateRoute = ({component: Component, ...rest}) => {
 
     // Run only one after init render.
     React.useEffect(() => {
-        // const loggedIn = localStorageHelper.getCookie("loggedIn");
-        // if (!loggedIn) {
-        //     setLoading(false);
-        //     return;
-        // }
+        const loggedIn = localStorageHelper.getCookie("loggedIn");
+        if (!loggedIn) {
+            setLoading(false);
+            return;
+        }
         authService.validateUser()
             .then(res => {
                 console.log(res);

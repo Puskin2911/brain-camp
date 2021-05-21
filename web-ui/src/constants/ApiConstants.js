@@ -6,6 +6,7 @@ const BASE_AUTH_API_URL = '/api/auth';
 const CHECK_AUTH_URL = API_BASE_URL + BASE_AUTH_API_URL + '/validate';
 const LOGIN_URL = API_BASE_URL + BASE_AUTH_API_URL + '/login';
 const SIGNUP_URL = API_BASE_URL + BASE_AUTH_API_URL + '/signup';
+
 const JOIN_ROOM_URL = API_BASE_URL + "/api/room/join";
 
 const SOCKET_CONNECT_URL = API_BASE_URL + '/stomp';

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -31,6 +32,9 @@ public class Player {
     }
 
     public void getCard(Card card) {
+        if(cards == null) {
+            cards = new ArrayList<>();
+        }
         cards.add(card);
     }
 

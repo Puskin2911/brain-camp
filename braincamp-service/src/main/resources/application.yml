@@ -1,0 +1,15 @@
+logging:
+  level:
+    org.springframework.web: DEBUG
+braincamp:
+  auth:
+    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+    tokenExpirationMs: 86400000 # One day
+  mvc:
+    allowedOrigins:
+      - "http://localhost:3000"
+      - "http://127.0.0.1:3000"
+  stomp:
+    disconnectDelay: 900 # 30 * 30
+    httpMessageCacheSize: 1000
+    streamBytesLimit: 524288 # 512 * 1024

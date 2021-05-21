@@ -36,6 +36,9 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public RoomDto joinRoom(Player player) {
+        player.setReady(false);
+        player.setCards(new ArrayList<>());
+
         if (players.isEmpty()) {
             usernameTurn = player.getUsername();
         }
@@ -84,7 +87,7 @@ public class GameServiceImpl implements GameService {
 
     private void startGame() {
         distributeCards();
-        sendMessage("/room" + "/game/start", usernameTurn);
+        sendMessage("/room" + "/game/start", wrapToRoomDto());
     }
 
     private void distributeCards() {

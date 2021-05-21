@@ -1,9 +1,11 @@
 const initRoom = "TonAction/initRoom"
-const updatePlayer = "TonAction/updatePlayer"
+const updatePlayers = "TonAction/updatePlayers"
+const updateMe = "TonAction/updateMe"
 
 const TonAction = {
     initRoom,
-    updatePlayer
+    updatePlayers,
+    updateMe
 }
 
 export default TonAction;

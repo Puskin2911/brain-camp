@@ -14,10 +14,15 @@ export default function tonReducer(state = initState, action) {
                 caves: action.payload.room.caves,
                 me: action.payload.me
             }
-        case TonAction.updatePlayer:
+        case TonAction.updatePlayers:
             return {
                 ...state,
                 players: action.payload
+            }
+        case TonAction.updateMe:
+            return {
+                ...state,
+                me: action.payload
             }
         default:
             return state
