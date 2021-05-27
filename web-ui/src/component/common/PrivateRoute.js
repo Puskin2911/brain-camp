@@ -3,37 +3,39 @@ import {Redirect, Route} from "react-router-dom";
 import LoadingIndicator from "./LoadingIndicator";
 import authService from "../../service/AuthService";
 import localStorageHelper from "../../utils/localStorageHelper";
+import {useDispatch, useSelector} from "react-redux";
+import AuthAction from "../../store/action/AuthAction";
 
 const PrivateRoute = ({component: Component, ...rest}) => {
+    const isAuthenticated = useSelector(state => {
+        return state.auth.isAuthenticated
+    })
 
-    const [isAuthenticated, setAuthenticated] = React.useState(false);
-    const [user, setUser] = React.useState(null);
+    const dispatch = useDispatch()
 
     const [isLoading, setLoading] = React.useState(true);
 
-    // Run only one after init render.
     React.useEffect(() => {
-        const loggedIn = localStorageHelper.getCookie("loggedIn");
-        if (!loggedIn) {
-            setLoading(false);
-            return;
+        const token = localStorageHelper.getCookie("access_token")
+        console.log("Token", token)
+        if (token.length > 0) {
+            authService.validateUser(token)
+                .then(res => {
+                    console.log(res);
+                    dispatch({
+                        type: AuthAction.initAuthenticated,
+                        payload: res.data
+                    })
+                })
+                .catch((error) => {
+                    console.log(error.response);
+                }).finally(() => {
+                setLoading(false);
+            });
+        } else {
+            setLoading(false)
         }
-        authService.validateUser()
-            .then(res => {
-                console.log(res);
-                setAuthenticated(true);
-                setUser(res.data);
-            })
-            .catch((error) => {
-                console.log(error.response);
-            }).finally(() => {
-            setLoading(false);
-        });
-    }, []);
-
-    const updateUser = (user) => {
-        setUser(user);
-    };
+    }, [dispatch]);
 
     if (isLoading) return <LoadingIndicator/>;
 
@@ -42,7 +44,7 @@ const PrivateRoute = ({component: Component, ...rest}) => {
             {...rest}
             render={props =>
                 isAuthenticated ?
-                    <Component {...rest} {...props} user={user} updateUser={updateUser}/>
+                    <Component {...rest} {...props}/>
                     :
                     <Redirect
                         to={{

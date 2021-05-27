@@ -98,9 +98,6 @@ const randomBoard = () => {
 
 const getGame = (level) => {
     const boardGoal = randomBoard()
-
-    console.log(boardGoal)
-
     const boardStatus = mockSudokuBoard(level)
 
     return new SudokuGame(level, boardStatus, boardGoal)

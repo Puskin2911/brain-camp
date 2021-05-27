@@ -9,6 +9,7 @@ import TonEnemyTable from "../../games/ton/TonEnemyTable";
 import TonTeamMateTable from "../../games/ton/TonTeamMateTable";
 import TonPG from "../../games/ton/TonPG";
 import tonService from "../../service/TonService";
+import authService from "../../service/AuthService";
 
 export default function TonRoom() {
 
@@ -27,7 +28,7 @@ export default function TonRoom() {
     })
 
     useEffect(() => {
-        stompClient.connect({}, () => {
+        stompClient.connect(authService.getAuthorizationHeader, () => {
             stompClient.subscribe("/room/join", (payload) => {
                 const player = JSON.parse(payload.body);
                 console.log(player)

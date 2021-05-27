@@ -5,6 +5,7 @@ import axios from "axios";
 import ApiConstants from "../../constants/ApiConstants";
 import {useDispatch} from "react-redux";
 import TonAction from "../../store/action/TonAction";
+import localStorageHelper from "../../utils/localStorageHelper";
 
 export default function TonLobby() {
 
@@ -21,7 +22,9 @@ export default function TonLobby() {
             team: team,
             slot: slot
         }
-        axios.post(ApiConstants.JOIN_ROOM_URL, user)
+        axios.post(ApiConstants.JOIN_ROOM_URL, user, {
+            headers: {Authorization: 'Bearer ' + localStorageHelper.getCookie("access_token")}
+        })
             .then(res => {
                 console.log(res)
                 dispatch({
