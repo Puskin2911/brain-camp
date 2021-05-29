@@ -12,7 +12,7 @@ export default function HonorTable() {
     return (
         <div>
             <h3 className={"text-center"}>Table of honor</h3>
-            <Table striped bordered hover>
+            <Table striped bordered hover className="rounded">
                 <thead>
                 <tr>
                     <th>#</th>

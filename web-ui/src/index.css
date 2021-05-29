@@ -4,7 +4,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #6e7c8c;
-    /*background-image: url("images/bg1.jpg");*/
+    background-image: url("images/bg1.jpg");
 }
 
 code {

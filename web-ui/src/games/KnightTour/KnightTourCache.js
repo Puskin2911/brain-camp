@@ -6,7 +6,7 @@ import knightTourService from "../../service/KnightTourService";
 import canvasService from "../../service/CanvasService";
 import {Col, Container, Row} from "react-bootstrap";
 
-export default function KnightTourBox(props) {
+export default function KnightTourCache(props) {
     const canvasRef = useRef();
     const boardSize = DEFAULT_BOARD_SIZE
 
