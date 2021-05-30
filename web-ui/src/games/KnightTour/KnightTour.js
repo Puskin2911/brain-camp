@@ -5,6 +5,7 @@ import KnightTourPG from "./KnightTourPG";
 import {useSelector} from "react-redux";
 import Header from "../../component/Header";
 import KnightTourBox from "./KnightTourBox";
+import KnightRTourInfo from "./KnightTourInfo";
 
 export default function KnightTour() {
     // Stored state
@@ -26,12 +27,15 @@ export default function KnightTour() {
                 <Col sm={5}>
                     <KnightTourPG/>
                 </Col>
-                <Col sm={1} className={"text-center mx-0"}>
+                <Col sm={2} className={"text-center mx-0"}>
                     <KnightTourBox boardVisible={boardVisible} handleShowBoard={handleShowBoard}/>
                 </Col>
                 <Col sm={5}>
                     <KnightTourCache visible={boardVisible} boardStatus={boardStatus}/>
                 </Col>
+            </Row>
+            <Row>
+                <KnightRTourInfo/>
             </Row>
         </Container>
     )

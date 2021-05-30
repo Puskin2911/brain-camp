@@ -55,6 +55,7 @@ export default function KnightTourCache(props) {
                             width={boardSize}
                             height={boardSize}
                             onMouseOver={handleMouseOver}
+                            className="border border-danger"
                     />
                 </Col>
             </Row>

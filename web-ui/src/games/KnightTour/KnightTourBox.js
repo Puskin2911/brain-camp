@@ -57,17 +57,17 @@ export default function KnightTourBox(props) {
 
     return (
         <Container fluid>
-            <Row>
-                <Col className="text-center">
-                    <Button onClick={handleCommit} disabled={typingValue === null || typingValue === ''}>Commit</Button>
-                </Col>
-            </Row>
-            <Row>
+            <Row className="mb-5">
                 <Col className="text-center">
                     <Button variant="info" className="m-2">New Game</Button>
                 </Col>
             </Row>
-            <Row>
+            <Row className="mt-5">
+                <Col className="text-center">
+                    <Button onClick={handleCommit} disabled={typingValue === null || typingValue === ''}>Commit</Button>
+                </Col>
+            </Row>
+            <Row className="my-4">
                 <Col className="text-center">
                     <Button variant={"info"} onClick={props.handleShowBoard}>
                         {props.boardVisible ? 'Close Board' : 'Open Board'}
